@@ -5,7 +5,7 @@
 -- Dumped from database version 9.1.24lts2
 -- Dumped by pg_dump version 9.5.0
 
--- Started on 2019-09-27 12:16:48 MSK
+-- Started on 2019-09-27 12:42:25 MSK
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -24,7 +24,7 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- TOC entry 1881 (class 0 OID 0)
+-- TOC entry 1885 (class 0 OID 0)
 -- Dependencies: 164
 -- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
 --
@@ -75,7 +75,7 @@ CREATE SEQUENCE users_id_seq
 ALTER TABLE users_id_seq OWNER TO developer;
 
 --
--- TOC entry 1882 (class 0 OID 0)
+-- TOC entry 1886 (class 0 OID 0)
 -- Dependencies: 161
 -- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: developer
 --
@@ -107,7 +107,7 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 
 
 --
--- TOC entry 1872 (class 0 OID 290428)
+-- TOC entry 1876 (class 0 OID 290428)
 -- Dependencies: 162
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: developer
 --
@@ -117,14 +117,14 @@ COPY users (id, username, password, auth_key, access_token, gender, age, lookfor
 5	john	john	john-key	john-token	M	28	F	18	85
 7	antony	antony	antony-key	antony-token	M	28	F	18	85
 1	admin	admin	test100key	token01	M	28	F	18	85
-2	user01	user01	test200key	test200token	F	28	M	18	85
 4	nikolas	nikolas	nikolas-key	nikolas-token	F	28	M	18	85
 6	mike	mike	mike-key	mike-token	F	28	M	18	85
+2	user01	user01	test200key	token02	F	28	M	18	85
 \.
 
 
 --
--- TOC entry 1883 (class 0 OID 0)
+-- TOC entry 1887 (class 0 OID 0)
 -- Dependencies: 161
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: developer
 --
@@ -133,7 +133,7 @@ SELECT pg_catalog.setval('users_id_seq', 7, true);
 
 
 --
--- TOC entry 1873 (class 0 OID 298617)
+-- TOC entry 1877 (class 0 OID 298617)
 -- Dependencies: 163
 -- Data for Name: votes; Type: TABLE DATA; Schema: public; Owner: developer
 --
@@ -145,7 +145,25 @@ COPY votes (user_id, candidate_user_id, vote) FROM stdin;
 
 
 --
--- TOC entry 1763 (class 2606 OID 290435)
+-- TOC entry 1763 (class 2606 OID 298651)
+-- Name: users_access_token_key; Type: CONSTRAINT; Schema: public; Owner: developer
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_access_token_key UNIQUE (access_token);
+
+
+--
+-- TOC entry 1765 (class 2606 OID 298649)
+-- Name: users_auth_key_key; Type: CONSTRAINT; Schema: public; Owner: developer
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_auth_key_key UNIQUE (auth_key);
+
+
+--
+-- TOC entry 1767 (class 2606 OID 290435)
 -- Name: users_login_key; Type: CONSTRAINT; Schema: public; Owner: developer
 --
 
@@ -154,7 +172,7 @@ ALTER TABLE ONLY users
 
 
 --
--- TOC entry 1765 (class 2606 OID 290433)
+-- TOC entry 1769 (class 2606 OID 290433)
 -- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: developer
 --
 
@@ -163,7 +181,7 @@ ALTER TABLE ONLY users
 
 
 --
--- TOC entry 1767 (class 2606 OID 298621)
+-- TOC entry 1771 (class 2606 OID 298621)
 -- Name: votes_pkey; Type: CONSTRAINT; Schema: public; Owner: developer
 --
 
@@ -172,7 +190,7 @@ ALTER TABLE ONLY votes
 
 
 --
--- TOC entry 1768 (class 2606 OID 298622)
+-- TOC entry 1772 (class 2606 OID 298622)
 -- Name: votes_candidate_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: developer
 --
 
@@ -181,7 +199,7 @@ ALTER TABLE ONLY votes
 
 
 --
--- TOC entry 1769 (class 2606 OID 298627)
+-- TOC entry 1773 (class 2606 OID 298627)
 -- Name: votes_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: developer
 --
 
@@ -190,7 +208,7 @@ ALTER TABLE ONLY votes
 
 
 --
--- TOC entry 1880 (class 0 OID 0)
+-- TOC entry 1884 (class 0 OID 0)
 -- Dependencies: 5
 -- Name: public; Type: ACL; Schema: -; Owner: postgres
 --
@@ -201,7 +219,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2019-09-27 12:16:49 MSK
+-- Completed on 2019-09-27 12:42:25 MSK
 
 --
 -- PostgreSQL database dump complete
