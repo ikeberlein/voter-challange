@@ -1,7 +1,7 @@
 <?php
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'pgsql:host=admin.dev;dbname=voter',
+    'dsn' => 'pgsql:host=voter.db;dbname=voter',
     'username' => 'developer',
     'password' => '',
     'charset' => 'utf8',
